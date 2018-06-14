@@ -12,5 +12,8 @@
   "dependencies": {
     "parse-function": "^5.2.10"
   },
-  "repository": ""
+  "repository": "https://github.com/platdesign/pd-dic.git",
+  "publishConfig": {
+      "access": "public"
+  }
 }
