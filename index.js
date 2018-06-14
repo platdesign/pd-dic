@@ -38,6 +38,11 @@ module.exports = class Dic {
 	}
 
 	register(key, factory) {
+
+		if(key && !factory && key.name && key.factory) {
+			return this.register(key.name, key.factory);
+		}
+
 		this._factories.set(key, utils.annotate(factory, PARAMS_SYMBOL));
 	}
 
@@ -56,7 +61,7 @@ module.exports = class Dic {
 		let bootOrder = utils.tsort(edges).reverse();
 		bootOrder.shift();
 
-		let injector = new MidgeInjector();
+		let injector = new DicInjector();
 
 		for(let key of bootOrder) {
 

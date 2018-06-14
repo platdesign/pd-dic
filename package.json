@@ -9,11 +9,16 @@
     }
   ],
   "version": "1.0.0",
-  "dependencies": {
-    "parse-function": "^5.2.10"
-  },
+  "dependencies": {},
   "repository": "https://github.com/platdesign/pd-dic.git",
   "publishConfig": {
     "access": "public"
+  },
+  "devDependencies": {
+    "code": "^5.2.0",
+    "mocha": "^5.2.0"
+  },
+  "scripts": {
+    "test": "mocha"
   }
 }
