@@ -10,11 +10,12 @@ const PARAMS_SYMBOL = Symbol('MidgeInjectParams');
 
 class DicInjector extends Map {
 
-	get(key, locals = {}) {
+	constructor() {
+		super();
+		this.set('$injector', this);
+	}
 
-		if(key === '$injector') {
-			return this;
-		}
+	get(key, locals = {}) {
 
 		if(!locals.hasOwnProperty(key) && !this.has(key)) {
 			throw new Error(`Service '${key}' not found`);
@@ -70,13 +71,17 @@ module.exports = class Dic {
 
 		for(let key of bootOrder) {
 
+			if(injector.has(key)) {
+				continue;
+			}
+
 			if(!this._factories.has(key)) {
 				throw new Error(`Factory '${key}' not found`);
 			}
 
 			let factory = this._factories.get(key);
 
-			console.log(`Creating service: ${key}`);
+			//console.log(`Creating service: ${key}`);
 
 			let service = await injector.invoke(factory);
 			if(service === undefined) {

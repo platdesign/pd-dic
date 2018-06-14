@@ -23,6 +23,10 @@ describe('dic', () => {
 
 		let dic = new Dic();
 
+		dic.register('a', ($injector) => 1);
+
+
+
 		let injector = await dic.boot();
 
 
@@ -30,6 +34,55 @@ describe('dic', () => {
 			expect($injector)
 				.to.shallow.equal(injector);
 		});
+
+
+		injector.invoke(($injector) => {
+			expect($injector)
+				.to.shallow.equal(injector);
+		});
+
+		injector.invoke((a, $injector) => {
+			expect($injector)
+				.to.shallow.equal(injector);
+		});
+
+		injector.invoke(function($injector) {
+			expect($injector)
+				.to.shallow.equal(injector);
+		});
+
+		injector.invoke(function(a, $injector) {
+			expect($injector)
+				.to.shallow.equal(injector);
+		});
+
+		injector.invoke(function asd($injector) {
+			expect($injector)
+				.to.shallow.equal(injector);
+		});
+
+		injector.invoke(function asd(a, $injector) {
+			expect($injector)
+				.to.shallow.equal(injector);
+		});
+
+		class Test {
+			static factory($injector) {
+				expect($injector)
+					.to.shallow.equal(injector);
+			}
+		}
+
+		injector.invoke(Test.factory);
+
+		class TestB {
+			static factory(a, $injector) {
+				expect($injector)
+					.to.shallow.equal(injector);
+			}
+		}
+
+		injector.invoke(TestB.factory);
 
 	});
 
