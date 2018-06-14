@@ -11,6 +11,11 @@ const PARAMS_SYMBOL = Symbol('MidgeInjectParams');
 class DicInjector extends Map {
 
 	get(key, locals = {}) {
+
+		if(key === '$injector') {
+			return this;
+		}
+
 		if(!locals.hasOwnProperty(key) && !this.has(key)) {
 			throw new Error(`Service '${key}' not found`);
 		}

@@ -3,9 +3,26 @@
 
 const { expect } = require('code');
 const { getParams } = require('../lib/utils');
+const Dic = require('../');
+
+
+
+describe('dic', () => {
+
+	it('should have $injector service', async () => {
+
+		let dic = new Dic();
+
+		let injector = await dic.boot()
+		expect(injector.get('$injector'))
+			.to.shallow.equal(injector);
+
+	});
+
+});
+
 
 describe('annotation', () => {
-
 
 	it('function', () => {
 
