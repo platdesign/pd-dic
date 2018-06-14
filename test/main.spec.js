@@ -19,6 +19,20 @@ describe('dic', () => {
 
 	});
 
+	it('should have $injector during invoke', async () => {
+
+		let dic = new Dic();
+
+		let injector = await dic.boot();
+
+
+		injector.invoke($injector => {
+			expect($injector)
+				.to.shallow.equal(injector);
+		});
+
+	});
+
 });
 
 
